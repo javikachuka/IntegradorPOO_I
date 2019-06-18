@@ -60,6 +60,10 @@ public class Controlador {
     }
     
     //METODOS DE HISTORIA CLINICA
+    public List listarHistoriasClinicas(){
+        return this.persistencia.buscarTodosOrdenadosPor(HistoriaClinica.class, HistoriaClinica_.paciente) ;
+    }
+    
     public void altaHistoriaClinica(String descEnfer , String medicamentos,Date fecha, Paciente pac){
         this.persistencia.iniciarTransaccion();
         try {
@@ -76,10 +80,9 @@ public class Controlador {
         }
     } 
     
-    public void modificarHistoClinica(Paciente p , Date fecha , String desEnfer , String Medicamentos){
+    public void modificarHistoClinica(HistoriaClinica hc , Date fecha , String desEnfer , String Medicamentos){
         this.persistencia.iniciarTransaccion();
-        if((p != null) && p.getHistoriaClinica() != null){
-            HistoriaClinica hc = p.getHistoriaClinica() ;
+        if((hc != null)){
             hc.setFecha(fecha);
             hc.setDescEnfer(desEnfer);
             hc.setMedicamentos(Medicamentos);

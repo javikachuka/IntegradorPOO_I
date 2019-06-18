@@ -83,5 +83,10 @@ public class HistoriaClinica {
         this.paciente = paciente;
     }
     
+    @Override
+    public String toString(){
+        return this.getIdHisCli() +" :" +this.paciente.getApellido() + ", " + this.paciente.getNombre() + " DNI:" +this.paciente.getDni()  ;
+    }
+    
     
 }
