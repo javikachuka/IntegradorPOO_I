@@ -6,8 +6,10 @@
 package modelo;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Persistence;
 import javax.persistence.Table;
@@ -28,8 +30,10 @@ public class Paciente {
     private Date fechaNac;
     private int numTel;
     private String historialMedico ;
+    @OneToMany(mappedBy="paciente")
+    private List<HistoriaClinica> historiasClinicas ;
     @OneToOne
-    private HistoriaClinica historiaClinica ;
+    private Turno turno ;
     
     public Paciente(){
         
@@ -92,14 +96,27 @@ public class Paciente {
         this.historialMedico = historialMedico;
     }
 
-    public HistoriaClinica getHistoriaClinica() {
-        return historiaClinica;
+    public List<HistoriaClinica> getHistoriasClinicas() {
+        return historiasClinicas;
     }
 
-    public void setHistoriaClinica(HistoriaClinica historiaClinica) {
-        this.historiaClinica = historiaClinica;
+    public void setHistoriasClinicas(List<HistoriaClinica> historiasClinicas) {
+        this.historiasClinicas = historiasClinicas;
     }
 
+    public void addHistoriaClinica(HistoriaClinica historiaClinica){
+        this.historiasClinicas.add(historiaClinica) ;
+    }
+
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
+    }
+
+    
     @Override
     public String toString() {
         return this.apellido + " " + this.nombre ;

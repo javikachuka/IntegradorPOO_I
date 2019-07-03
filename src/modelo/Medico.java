@@ -45,6 +45,8 @@ public class Medico {
     private Especialidad especialidad;
     @OneToMany(mappedBy="medico")
     private List<Turno> turnos ;
+    @OneToMany(mappedBy="medico")
+    private List<HistoriaClinica> histoClinicas ;
     //Constructores
 
     public Medico() {
@@ -53,6 +55,7 @@ public class Medico {
         this.hsComienzoT = 16;
         this.hsFinalT = 20;
         turnos = new ArrayList<>();
+        histoClinicas = new ArrayList<>();
     }
 
     public Medico(int nrMatricula, String nombre, String apellido, int nrTel,Especialidad espe) {
@@ -65,6 +68,8 @@ public class Medico {
         this.hsFinalM = 12;
         this.hsComienzoT = 16;
         this.hsFinalT = 20;
+        histoClinicas = new ArrayList<>();
+        turnos = new ArrayList<>();
         
     }
     
@@ -130,11 +135,33 @@ public class Medico {
         return hsFinalT;
     }
 
+    public List<Turno> getTurnos() {
+        return turnos;
+    }
+
+    public void setTurnos(List<Turno> turnos) {
+        this.turnos = turnos;
+    }
+
+    public List<HistoriaClinica> getHistoClinicas() {
+        return histoClinicas;
+    }
+
+    public void setHistoClinicas(List<HistoriaClinica> histoClinicas) {
+        this.histoClinicas = histoClinicas;
+    }
+
+    public void addHistoriaClinica(HistoriaClinica hisCli){
+        this.histoClinicas.add(hisCli) ;
+    }
     
+    public void addTurno(Turno t){
+        this.turnos.add(t) ;
+    }
 
     @Override
     public String toString() {
-        return   nrMatricula + ", " + this.apellido + " " + this.nombre ;
+        return   nrMatricula + ", " + this.apellido + " " + this.nombre +" "+this.especialidad;
     }
     
     

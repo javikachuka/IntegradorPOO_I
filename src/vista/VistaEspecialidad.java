@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.Controlador;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Especialidad;
@@ -17,18 +18,19 @@ import modelo.Especialidad;
 public class VistaEspecialidad extends javax.swing.JFrame {
     
     private final Controlador controlador;
-    private JFrame previo ;
+    private final JFrame previo;
     /**
      * Creates new form VistaEspecialidad
      */
-    public VistaEspecialidad(Controlador c,JFrame p) {
+    public VistaEspecialidad(Controlador c, JFrame p) {
         initComponents();
         this.controlador = c;
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.previo = p ;
+        this.setLocationRelativeTo(null) ;
+        this.previo =  p ;
+        recargarEspe();
     }
 
     /**
@@ -48,10 +50,12 @@ public class VistaEspecialidad extends javax.swing.JFrame {
         btnVer = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        txtDescripcion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         nuevo = new javax.swing.JButton();
-        cancelar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtDescripcion = new javax.swing.JTextPane();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -88,9 +92,14 @@ public class VistaEspecialidad extends javax.swing.JFrame {
 
         jLabel3.setText("*Podemos visualizar las nuevas especialidades.");
 
-        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcionActionPerformed(evt);
+                txtNombreActionPerformed(evt);
+            }
+        });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
             }
         });
 
@@ -103,10 +112,14 @@ public class VistaEspecialidad extends javax.swing.JFrame {
             }
         });
 
-        cancelar.setText("Cancelar");
-        cancelar.addActionListener(new java.awt.event.ActionListener() {
+        jLabel5.setText("Especialidad");
+
+        jScrollPane3.setViewportView(txtDescripcion);
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -117,85 +130,122 @@ public class VistaEspecialidad extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnCargar)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(txtDescripcion))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 64, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nuevo)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1)
                             .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnVer)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(nuevo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cancelar)))
-                        .addGap(48, 48, 48)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(150, Short.MAX_VALUE))
+                                .addGap(97, 97, 97)
+                                .addComponent(jButton1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(40, 40, 40))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCargar)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel4)
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnVer)
-                            .addComponent(nuevo)
-                            .addComponent(cancelar)))
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(25, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCargar)
+                        .addComponent(nuevo))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnVer)
+                        .addComponent(jButton1)))
+                .addGap(22, 22, 22)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addContainerGap())
+                .addComponent(jLabel3))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
-        if (!this.ListaEspecialidad.isSelectionEmpty()){
-            Especialidad especialidad = (Especialidad) this.ListaEspecialidad.getSelectedValue();
+            if (this.txtNombre.getText().isEmpty() || this.txtDescripcion.getText().isEmpty() ) {
+                JOptionPane.showMessageDialog(null, "Tiene que completar todos los campos porfavor!");
+            }
+            else{        
+                
+                if (!this.ListaEspecialidad.isSelectionEmpty()){
+                    
+                    Especialidad especialidad = (Especialidad) this.ListaEspecialidad.getSelectedValue();
             
-            String nombre = txtNombre.getText();
+                    String nombre = txtNombre.getText();
             
-            String descripcion = txtDescripcion.getText();
+                    String descripcion = txtDescripcion.getText();
             
-            this.controlador.modificarEspecialidad(especialidad, nombre, descripcion);
+                    this.controlador.modificarEspecialidad(especialidad, nombre, descripcion);
             
-            JOptionPane.showMessageDialog(null, "Se cargo");
+                    JOptionPane.showMessageDialog(null, "Se cargo");
+                    
+                } else {
+                    try {
+                        String nombre = txtNombre.getText();
+                        
+                        
+                        List <Especialidad> espe =  controlador.listarEspecialidades();
+                        boolean existe = false;
+                        int i = 0 ;
+                        
+                        while ((existe != true) && (i<espe.size())){
+                            
+                            if (espe.get(i).getNombre().equals(nombre.toUpperCase()) ) {
+                            existe = true;
+                            System.out.println(existe);
+                            }  
+                            i++;
+                        }
+                        if (existe == true){
+                            JOptionPane.showMessageDialog(null, "Ya exite esa especialidad!!");
+                        }
+                        else{
+                            String descripcion = txtDescripcion.getText();
             
-        } else {
-            String nombre = txtNombre.getText();
+                            this.controlador.altaEspecialidad(nombre, descripcion);
             
-            String descripcion = txtDescripcion.getText();
+                            JOptionPane.showMessageDialog(null, "Se cargo");
+                        }
+                    }
+                    catch(Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+            limpiar();
             
-            this.controlador.altaEspecialidad(nombre, descripcion);
-            
-            JOptionPane.showMessageDialog(null, "Se cargo");
-        }
     }//GEN-LAST:event_btnCargarActionPerformed
-
-    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcionActionPerformed
 
     private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
         try {
@@ -210,6 +260,7 @@ public class VistaEspecialidad extends javax.swing.JFrame {
         if (!ListaEspecialidad.isSelectionEmpty()) {
             Especialidad espe = (Especialidad) ListaEspecialidad.getSelectedValue();
             this.txtDescripcion.setText(espe.getDescripcion());
+            this.txtNombre.setText(espe.getNombre());
         }
     }//GEN-LAST:event_ListaEspecialidadValueChanged
 
@@ -229,17 +280,33 @@ public class VistaEspecialidad extends javax.swing.JFrame {
           desbloquear();
     }//GEN-LAST:event_nuevoActionPerformed
 
-    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        bloquear();  
-    }//GEN-LAST:event_cancelarActionPerformed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-         this.previo.setVisible(true);
+        this.previo.setVisible(true);
         this.previo.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
-    
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        char car = evt.getKeyChar();
+        if (Character.isLetter(car)){
+            
+        }
+        else{
+            evt.consume();
+            getToolkit().beep();
+        }        
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.previo.setVisible(true);
+        this.previo.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -250,17 +317,25 @@ public class VistaEspecialidad extends javax.swing.JFrame {
     private javax.swing.JList ListaEspecialidad;
     private javax.swing.JButton btnCargar;
     private javax.swing.JButton btnVer;
-    private javax.swing.JButton cancelar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton nuevo;
-    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextPane txtDescripcion;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
+    private void limpiar() {
+        this.ListaEspecialidad.clearSelection();
+        this.txtNombre.setText("");
+        this.txtDescripcion.setText("");
+    }
+    
     private void recargarEspe() {
         this.ListaEspecialidad.setListData(this.controlador.listarEspecialidades().toArray());
 

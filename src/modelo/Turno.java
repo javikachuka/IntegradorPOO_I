@@ -31,6 +31,7 @@ public class Turno {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaTurno ;
     private int horarioTurno ; // horario por ejemplo a las 8 hs
+    private boolean disponible ;
     private String recordatorio ;
     private boolean asistencia;
     @OneToOne
@@ -42,11 +43,18 @@ public class Turno {
         
     }
     
-    public Turno(Date fechaTurno, int horarioTurno,Paciente paciente, Medico medico){
+    public Turno(Date fecha , int horarioTurno){
+        this.fechaTurno = fecha ;
+        this.horarioTurno = horarioTurno ;
+        this.disponible = true ;
+        
+    }
+    
+    public Turno(Date fechaTurno, int horarioTurno, Medico medico){
         this.fechaTurno = fechaTurno ;
         this.horarioTurno = horarioTurno ;
-        this.paciente = paciente ;
         this.medico = medico ;
+        this.disponible = true;
     }
 
     public Turno(Date fechaTurno, int horarioTurno, String recordatorio, Paciente paciente, Medico medico) {
@@ -55,6 +63,7 @@ public class Turno {
         this.recordatorio = recordatorio;
         this.paciente = paciente;
         this.medico = medico;
+        this.disponible = false ;
     }
 
     public int getIdTurno() {
@@ -108,9 +117,19 @@ public class Turno {
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
     
     
-    
-    
+    @Override
+    public String toString (){
+        return this.horarioTurno + " hs." ;
+    }
     
 }

@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.Controlador;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ public class VistaMedico extends javax.swing.JFrame {
     
     private final Controlador controlador;
     private JFrame previo ;
+    
     /**
      * Creates new form VistaMedico
      */
@@ -29,10 +31,11 @@ public class VistaMedico extends javax.swing.JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.previo = p ;
+        this.setLocationRelativeTo(null) ;
+        this.previo =  p ;
         DefaultComboBoxModel eCombo = new DefaultComboBoxModel(this.controlador.listarEspecialidades().toArray());
         this.comboespe.setModel(eCombo);
+        recargarMedi();
     }
 
     /**
@@ -60,6 +63,7 @@ public class VistaMedico extends javax.swing.JFrame {
         comboespe = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         btnRecargaMed = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -147,10 +151,17 @@ public class VistaMedico extends javax.swing.JFrame {
 
         jLabel6.setText("Especialidad");
 
-        btnRecargaMed.setText("Recargar");
+        btnRecargaMed.setText("Nuevo");
         btnRecargaMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRecargaMedActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -162,42 +173,44 @@ public class VistaMedico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnRecargaMed)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnVer)
-                                .addGap(14, 14, 14))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMat, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(19, 19, 19))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(comboespe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnRecargaMed)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnVer)
+                                .addGap(31, 31, 31)
+                                .addComponent(jButton1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMat, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -205,18 +218,17 @@ public class VistaMedico extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(1, 1, 1)
                         .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addGap(1, 1, 1)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)))
+                        .addGap(5, 5, 5)
+                        .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -225,7 +237,8 @@ public class VistaMedico extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCargar)
                     .addComponent(btnVer)
-                    .addComponent(btnRecargaMed))
+                    .addComponent(btnRecargaMed)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -292,19 +305,34 @@ public class VistaMedico extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Se cargo");
             
                 } else {
-                    int nrMat = Integer.parseInt(txtMat.getText()); //lo que esta dentro del txtMat lo transformamos en integer
+                    int nrMat = Integer.parseInt(txtMat.getText());//lo que esta dentro del txtMat lo transformamos en integer
         
-                    String nombre = txtNombre.getText();
+                    List <Medico> medi =  controlador.listarMedico();
+                    boolean existe = false;
+                    int i = 0 ;
+                    while ((existe != true) && (i < medi.size())){
+                        if (medi.get(i).getNrMatricula() == nrMat ) {
+                            existe = true;
+                        } 
+                        i++;  
+                    }
+                    if (existe == true){
+                        JOptionPane.showMessageDialog(null, "Ya exite el numero de matricula!!");
+                        limpiar();
+                    }      
+                    else {
+                        String nombre = txtNombre.getText();
         
-                    String apellido = txtApellido.getText();
+                        String apellido = txtApellido.getText();
         
-                    int nrTel = Integer.parseInt(txtTel.getText());
+                        int nrTel = Integer.parseInt(txtTel.getText());
 
-                    Especialidad espe = (Especialidad) comboespe.getSelectedItem();
+                        Especialidad espe = (Especialidad) comboespe.getSelectedItem();
         
-                    this.controlador.altaMedico(nrMat, nombre, apellido, nrTel, espe);
+                        this.controlador.altaMedico(nrMat, nombre, apellido, nrTel, espe);
         
-                    JOptionPane.showMessageDialog(null, "Se cargo");
+                        JOptionPane.showMessageDialog(null, "Se cargo");
+                    }
                 }
             }
         
@@ -326,14 +354,14 @@ public class VistaMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        char car = evt.getKeyChar();
-        if (Character.isLetter(car)){
+        //char car = evt.getKeyChar();
+        //if (Character.isLetter(car)){
             
-        }
-        else{
-            evt.consume();
-            getToolkit().beep();
-        }
+        //}
+        //else{
+        //    evt.consume();
+        //    getToolkit().beep();
+        //}
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtMatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKeyTyped
@@ -348,14 +376,14 @@ public class VistaMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMatKeyTyped
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
-        char car = evt.getKeyChar();
+        /*char car = evt.getKeyChar();
         if (Character.isLetter(car)){
             
         }
         else{
             evt.consume();
             getToolkit().beep();
-        }
+        }*/
     }//GEN-LAST:event_txtApellidoKeyTyped
 
     private void txtTelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelKeyTyped
@@ -368,8 +396,7 @@ public class VistaMedico extends javax.swing.JFrame {
             getToolkit().beep();
         }
     }//GEN-LAST:event_txtTelKeyTyped
-    
-    
+
     
     private void btnRecargaMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargaMedActionPerformed
           this.ListaMedico.clearSelection();
@@ -381,10 +408,16 @@ public class VistaMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRecargaMedActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-         this.previo.setVisible(true);
+        this.previo.setVisible(true);
         this.previo.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.previo.setVisible(true);
+        this.previo.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     private void desbloquear () {
         this.txtMat.setEditable(true);
@@ -393,8 +426,17 @@ public class VistaMedico extends javax.swing.JFrame {
         this.txtTel.setEditable(true);
     }
     
+    private void limpiar () {
+          this.txtMat.setText("");
+          this.txtNombre.setText("");
+          this.txtApellido.setText("");
+          this.txtTel.setText("");
+    }
+    
     private void recargarMedi () {
         this.ListaMedico.setListData(this.controlador.listarMedico().toArray());
+
+        
         
     }
     /**
@@ -407,6 +449,7 @@ public class VistaMedico extends javax.swing.JFrame {
     private javax.swing.JButton btnRecargaMed;
     private javax.swing.JButton btnVer;
     private javax.swing.JComboBox comboespe;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

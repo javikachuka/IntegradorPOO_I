@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import modelo.Medico;
 import modelo.Paciente;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-17T22:07:27")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-21T10:33:21")
 @StaticMetamodel(Turno.class)
 public class Turno_ { 
 
@@ -18,5 +18,6 @@ public class Turno_ {
     public static volatile SingularAttribute<Turno, Integer> horarioTurno;
     public static volatile SingularAttribute<Turno, Integer> idTurno;
     public static volatile SingularAttribute<Turno, Date> fechaTurno;
+    public static volatile SingularAttribute<Turno, Boolean> disponible;
 
 }

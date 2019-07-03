@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
@@ -34,17 +35,21 @@ public class HistoriaClinica {
     private String medicamentos ;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha ;
-    @OneToOne
+    @ManyToOne
     private Paciente paciente ;
+    @ManyToOne
+    private Medico medico;
     
     public HistoriaClinica (){
         this.fecha = new Date() ;
     }
     
-    public HistoriaClinica(String descripcion , String medicamentos,Date fecha){
+    public HistoriaClinica(String descripcion , String medicamentos,Date fecha,Paciente p, Medico m){
         this.descEnfer = descripcion ;
         this.medicamentos = medicamentos ;
         this.fecha = fecha ;
+        this.paciente = p ;
+        this.medico = m ;
     }
 
     public int getIdHisCli() {
@@ -82,10 +87,19 @@ public class HistoriaClinica {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+    
     
     @Override
     public String toString(){
-        return this.getIdHisCli() +" :" +this.paciente.getApellido() + ", " + this.paciente.getNombre() + " DNI:" +this.paciente.getDni()  ;
+        return paciente.getDni() + ". Razon: " + this.medico.getEspecialidad().getNombre() ;
     }
     
     

@@ -6,6 +6,9 @@
 package vista;
 
 import controlador.Controlador;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -25,7 +28,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        
+        /*ImageIcon img = new ImageIcon("src/imagen/img.png") ;
+        Icon icono = new ImageIcon(img.getImage().getScaledInstance(labelImg.getWidth(), labelImg.getWidth(), Image.SCALE_DEFAULT)) ;
+        labelImg.setIcon(icono);
+        this.repaint();*/
+    
     }
 
     /**
@@ -43,85 +50,77 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnTur = new javax.swing.JButton();
         btnMed = new javax.swing.JButton();
         btnEspe = new javax.swing.JButton();
+        labelImg = new javax.swing.JLabel();
+        labelImg2 = new javax.swing.JLabel();
+        label3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/paci.png"))); // NOI18N
         btnPaciente.setText("PACIENTES");
+        btnPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnPaciente.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         btnPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPacienteActionPerformed(evt);
             }
         });
+        getContentPane().add(btnPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 220, 90));
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setText("VENTANA PRINCIPAL");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
-        btnHisCli.setText("HISTORIAS CLINICAS");
+        btnHisCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/hiscli.png"))); // NOI18N
+        btnHisCli.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnHisCli.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnHisCli.setLabel("HISTORIAS CLINICAS");
         btnHisCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHisCliActionPerformed(evt);
             }
         });
+        getContentPane().add(btnHisCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 220, 100));
 
+        btnTur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/tur.png"))); // NOI18N
         btnTur.setText("TURNOS");
+        btnTur.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         btnTur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTurActionPerformed(evt);
             }
         });
+        getContentPane().add(btnTur, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 210, 90));
 
+        btnMed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/medic.png"))); // NOI18N
         btnMed.setText("MEDICOS");
+        btnMed.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMedActionPerformed(evt);
             }
         });
+        getContentPane().add(btnMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 210, 100));
 
+        btnEspe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/espe.png"))); // NOI18N
         btnEspe.setText("ESPECIALIDADES");
+        btnEspe.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEspe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEspeActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEspe, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 220, 90));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnHisCli, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEspe, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnTur, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(btnMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(54, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnHisCli, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
-                .addComponent(btnEspe, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
-        );
+        labelImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/img.png"))); // NOI18N
+        getContentPane().add(labelImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 110, -1));
+
+        labelImg2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/img2.png"))); // NOI18N
+        getContentPane().add(labelImg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 60, 60));
+
+        label3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/img3.png"))); // NOI18N
+        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -178,7 +177,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMedActionPerformed
 
     
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEspe;
     private javax.swing.JButton btnHisCli;
@@ -186,5 +185,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPaciente;
     private javax.swing.JButton btnTur;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel label3;
+    private javax.swing.JLabel labelImg;
+    private javax.swing.JLabel labelImg2;
     // End of variables declaration//GEN-END:variables
 }
